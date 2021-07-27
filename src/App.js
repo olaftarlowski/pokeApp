@@ -1,7 +1,7 @@
 import { Redirect, Route, Switch, Link } from "react-router-dom";
 import styles from "./App.module.css";
 import PokemonFullList from "./components/PokemonFullList/PokemonFullList";
-import PokemonSingle from './components/PokemonSingle/PokemonSingle'
+import PokemonSingle from "./components/PokemonSingle/PokemonSingle";
 import {
   ApolloClient,
   InMemoryCache,
@@ -10,6 +10,7 @@ import {
   HttpLink,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
+import BackButton from "./UI/BackButton/BackButton";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -35,10 +36,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className={styles.App}>
+        <div className={styles.introSection}>
         <h1>headline main</h1>
         <Link to="/">
-          <button>Back to full base</button>
+          <BackButton>Back to full base</BackButton>
         </Link>
+        </div>
 
         <Switch>
           <Route path="/" exact>
