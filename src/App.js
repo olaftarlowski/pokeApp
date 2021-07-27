@@ -1,10 +1,32 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import styles from "./App.module.css";
 import Test from "./components/Test";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  from,
+  HttpLink,
+} from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
+
+const link = from([
+  errorLink,
+  new HttpLink({ uri: "https://countries.trevorblades.com/" }),
+]);
 
 const client = new ApolloClient({
-  uri: "https://countries.trevorblades.com/",
+  link,
   cache: new InMemoryCache(),
 });
 
