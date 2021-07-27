@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
-import {POKE_API} from "../../queries/Queries";
+import { POKE_API } from "../../queries/Queries";
 import PokemonItem from "./Pokemon/PokemonItem";
 import styles from "./PokemonFullList.module.css";
 
 const PokemonFullList = () => {
   const { loading, error, data } = useQuery(POKE_API, {
-    variables: { limit: 340, offset: 0 },
+    variables: { limit: 26, offset: 0 },
   });
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -14,7 +14,12 @@ const PokemonFullList = () => {
       <div className={styles.wrapper}>
         {data.pokemons.results.map((item) => {
           return (
-            <PokemonItem key={item.id} id={item.id} name={item.name} image={item.image} />
+            <PokemonItem
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              image={item.image}
+            />
           );
         })}
       </div>
