@@ -1,12 +1,22 @@
 import { gql } from "@apollo/client";
 
-const api = gql`
-  query {
-    continents {
-      code
+const POKE_API = gql`
+query pokemons($limit: Int, $offset: Int) {
+  pokemons(limit: $limit, offset: $offset) {
+    count
+    next
+    previous
+    nextOffset
+    prevOffset
+    status
+    message
+    results {
+      url
       name
+      image
     }
   }
+}
 `;
 
-export default api;
+export default POKE_API;

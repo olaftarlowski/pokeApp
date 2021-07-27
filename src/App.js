@@ -1,6 +1,6 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import styles from "./App.module.css";
-import Test from "./components/Test";
+import FullList from "./components/FullList/FullList";
 import {
   ApolloClient,
   InMemoryCache,
@@ -22,7 +22,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const link = from([
   errorLink,
-  new HttpLink({ uri: "https://countries.trevorblades.com/" }),
+  new HttpLink({ uri: "https://graphql-pokeapi.vercel.app/api/graphql" }),
 ]);
 
 const client = new ApolloClient({
@@ -41,10 +41,10 @@ function App() {
             <Redirect to="/dex"></Redirect>
           </Route>
           <Route path="/dex" exact>
-            <Test></Test>
+            <FullList></FullList>
           </Route>
           <Route path="/dex/:pokeCode" exact>
-            <Test></Test>
+            <FullList></FullList>
           </Route>
 
           <Route path="*" exact>
