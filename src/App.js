@@ -11,6 +11,7 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import BackButton from "./UI/BackButton/BackButton";
+import Pokedex from "./UI/Pokedex/Pokedex";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -52,6 +53,7 @@ function App() {
           </Route>
           <Route path="/dex/:pokeCode" exact>
             <PokemonSingle></PokemonSingle>
+            <Pokedex></Pokedex>
           </Route>
 
           <Route path="*" exact>

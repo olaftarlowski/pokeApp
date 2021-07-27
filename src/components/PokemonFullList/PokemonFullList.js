@@ -5,7 +5,7 @@ import styles from "./PokemonFullList.module.css";
 
 const PokemonFullList = () => {
   const { loading, error, data } = useQuery(POKE_API, {
-    variables: { limit: 10, offset: 0 },
+    variables: { limit: 340, offset: 0 },
   });
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
