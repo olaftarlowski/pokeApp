@@ -11,7 +11,7 @@ query pokemons($limit: Int, $offset: Int) {
     status
     message
     results {
-      url
+      id
       name
       image
     }
