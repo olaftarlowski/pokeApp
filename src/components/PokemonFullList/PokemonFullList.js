@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import POKE_API from "../../queries/Queries";
-import PokemonItem from "../Pokemon/PokemonItem";
+import PokemonItem from "./Pokemon/PokemonItem";
 import styles from "./PokemonFullList.module.css";
 
 const PokemonFullList = () => {
