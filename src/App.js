@@ -1,6 +1,7 @@
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, Link } from "react-router-dom";
 import styles from "./App.module.css";
 import PokemonFullList from "./components/PokemonFullList/PokemonFullList";
+import PokemonSingle from './components/PokemonSingle/PokemonSingle'
 import {
   ApolloClient,
   InMemoryCache,
@@ -35,6 +36,9 @@ function App() {
     <ApolloProvider client={client}>
       <div className={styles.App}>
         <h1>headline main</h1>
+        <Link to="/">
+          <button>Back to full base</button>
+        </Link>
 
         <Switch>
           <Route path="/" exact>
@@ -44,7 +48,7 @@ function App() {
             <PokemonFullList></PokemonFullList>
           </Route>
           <Route path="/dex/:pokeCode" exact>
-            <PokemonFullList></PokemonFullList>
+            <PokemonSingle></PokemonSingle>
           </Route>
 
           <Route path="*" exact>
