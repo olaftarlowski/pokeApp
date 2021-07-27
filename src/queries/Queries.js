@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const POKE_API = gql`
+export const POKE_API = gql`
 query pokemons($limit: Int, $offset: Int) {
   pokemons(limit: $limit, offset: $offset) {
     count
@@ -19,4 +19,13 @@ query pokemons($limit: Int, $offset: Int) {
 }
 `;
 
-export default POKE_API;
+export const POKE_API_SINGLE = gql`
+query pokemon($name: String!) {
+  pokemon (name: $name) {
+    id
+    name
+    message
+  }
+}
+`;
+
