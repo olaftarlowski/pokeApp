@@ -73,7 +73,32 @@ const PokemonSingleItem = (props) => {
       <div className={`${styles.right} ${styles.dexWing}`}>
         <div className={styles.rightOverlay}>
           <div className={styles.dataDisplay}>
-            <h2>{props.name}</h2>
+            <h2>
+              {props.id}. {props.name}
+            </h2>
+            <p>
+              <b>Height:</b> {props.height}"
+            </p>
+            <p>
+              <b>Weight:</b> {props.weight} lbs.
+            </p>
+            <p>
+              <b>Types:</b>{" "}
+              {props.types.map((item) => {
+                return (
+                  <span className={styles.displayTypes} key={item.type.name}>
+                    {" "}
+                    {item.type.name}
+                  </span>
+                );
+              })}
+            </p>
+            <p><b>Moves:</b> {props.moves.map( (item) => {
+              return <span className={styles.displayTypes} key={item.move.name}>
+                {" "}
+                {item.move.name}
+              </span>
+            })}</p>
           </div>
           <div className={styles.botButtons}>
             <div className={styles.buttonsSet}>

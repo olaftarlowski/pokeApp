@@ -22,8 +22,13 @@ const PokemonSingle = (props) => {
   if (data) {
     return (
       <PokemonSingleItem
+        id={data.pokemon.id}
         name={data.pokemon.name}
         image={data.pokemon.sprites.front_default}
+        height={data.pokemon.height}
+        weight={data.pokemon.weight}
+        types={data.pokemon.types}
+        moves={data.pokemon.moves}
       ></PokemonSingleItem>
     );
   }

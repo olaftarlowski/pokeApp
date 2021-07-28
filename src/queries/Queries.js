@@ -24,9 +24,20 @@ export const POKE_API_SINGLE = gql`
     pokemon(name: $name) {
       id
       name
-      message
       sprites {
         front_default
+      }
+      height
+      weight
+      moves {
+        move {
+          name
+        }
+      }
+      types {
+        type {
+          name
+        }
       }
     }
   }
