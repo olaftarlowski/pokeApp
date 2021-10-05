@@ -6,13 +6,21 @@ import styles from "./PokemonFullList.module.css";
 
 const PokemonFullList = () => {
   const { loading, error, data } = useQuery(POKE_API, {
-    variables: { limit: 26, offset: 0 },
+    variables: { limit: 600, offset: 0 },
   });
 
   const [inputValue, setInputValue] = useState("");
+  const [dataLimit, setDataLimit] = useState(36);
 
   const inputFilterHandler = (event) => {
     setInputValue(event.target.value);
+  };
+
+  const loadMoreHandler = () => {
+    setDataLimit((e) => e + 36);
+  };
+  const loadAllHandler = () => {
+    setDataLimit(600);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -20,15 +28,20 @@ const PokemonFullList = () => {
   if (data) {
     return (
       <>
-        <input type="text" value={inputValue} onChange={inputFilterHandler} placeholder="Enter name or number..."/>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={inputFilterHandler}
+          placeholder="Enter name or number..."
+        />
         <div className={styles.wrapper}>
           {data.pokemons.results
+            .slice(0, dataLimit)
             .filter((filtItem) => {
               if (!inputValue) return true;
-              const lowerCase = inputValue.toLowerCase()
+              const lowerCase = inputValue.toLowerCase();
               return (
-                filtItem.id === +inputValue ||
-                filtItem.name.includes(lowerCase)
+                filtItem.id === +inputValue || filtItem.name.includes(lowerCase)
               );
             })
             .map((item) => {
@@ -41,6 +54,14 @@ const PokemonFullList = () => {
                 />
               );
             })}
+        </div>
+        <div className={styles.bottomBtn}>
+          <button className={styles.btnMore} onClick={loadMoreHandler}>
+            Load more
+          </button>
+          <button className={styles.btnMore} onClick={loadAllHandler}>
+            Load all
+          </button>
         </div>
       </>
     );
