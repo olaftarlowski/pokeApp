@@ -57,6 +57,11 @@ const PokemonFullList = () => {
       });
     }
 
+    let errorMessage = "";
+    if (dataResults.length === 0) {
+      errorMessage = <p>Nothing found ;(</p>
+    }
+
     const sortNumberHandler = () => {
       setSortByName(true);
     };
@@ -73,14 +78,17 @@ const PokemonFullList = () => {
             onChange={inputFilterHandler}
             placeholder="Enter name or number..."
           />
+          <div className={styles.btnWrapper}>
           <button className={styles.btnMore} onClick={sortNumberHandler}>
             Sort by name
           </button>
           <button className={styles.btnMore} onClick={sortNameHandler}>
             Sort by number
           </button>
+          </div>
         </div>
         <div className={styles.wrapper}>{dataResults}</div>
+        <div className={styles.controls}>{errorMessage}</div>
         <div className={styles.bottomBtn}>
           <button className={styles.btnMore} onClick={loadMoreHandler}>
             Load more

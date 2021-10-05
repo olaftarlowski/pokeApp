@@ -3,7 +3,7 @@
 }
 
 .item {
-  background: #4682B4;
+  background: #4682b4;
   width: 170px;
   height: 200px;
   margin: 10px;
@@ -13,8 +13,7 @@
 }
 
 .item:hover {
-  border: 2px solid #79b9e1
-  ;
+  border: 2px solid #79b9e1;
 }
 
 .name {
@@ -48,5 +47,15 @@
   }
   to {
     transform: translateX(0px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .item {
+    width: 130px;
+  }
+
+  .name {
+    font-size: 18px;
   }
 }

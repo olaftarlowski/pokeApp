@@ -37,7 +37,7 @@ function App() {
     <ApolloProvider client={client}>
       <div className={styles.App}>
         <div className={styles.introSection}>
-          <h1>headline main</h1>
+          <h1>Pokédex App</h1>
           <Link to="/">
             <BackButton>Back to full base</BackButton>
           </Link>
