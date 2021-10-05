@@ -11,6 +11,7 @@ const PokemonFullList = () => {
 
   const [inputValue, setInputValue] = useState("");
   const [dataLimit, setDataLimit] = useState(36);
+  const [sortByName, setSortByName] = useState(false);
 
   const inputFilterHandler = (event) => {
     setInputValue(event.target.value);
@@ -26,35 +27,60 @@ const PokemonFullList = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   if (data) {
+    const dataResults = data.pokemons.results
+      .slice(0, dataLimit)
+      .filter((filtItem) => {
+        if (!inputValue) return true;
+        const lowerCase = inputValue.toLowerCase();
+        return filtItem.id === +inputValue || filtItem.name.includes(lowerCase);
+      })
+      .map((item) => {
+        return (
+          <PokemonItem
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            image={item.image}
+          />
+        );
+      });
+
+    if (sortByName) {
+      dataResults.sort((a, b) => {
+        if (a.props.name < b.props.name) {
+          return -1;
+        }
+        if (a.props.name > b.props.namee) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+
+    const sortNumberHandler = () => {
+      setSortByName(true);
+    };
+    const sortNameHandler = () => {
+      setSortByName(false);
+    };
+
     return (
       <>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={inputFilterHandler}
-          placeholder="Enter name or number..."
-        />
-        <div className={styles.wrapper}>
-          {data.pokemons.results
-            .slice(0, dataLimit)
-            .filter((filtItem) => {
-              if (!inputValue) return true;
-              const lowerCase = inputValue.toLowerCase();
-              return (
-                filtItem.id === +inputValue || filtItem.name.includes(lowerCase)
-              );
-            })
-            .map((item) => {
-              return (
-                <PokemonItem
-                  key={item.id}
-                  id={item.id}
-                  name={item.name}
-                  image={item.image}
-                />
-              );
-            })}
+        <div className={styles.controls}>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={inputFilterHandler}
+            placeholder="Enter name or number..."
+          />
+          <button className={styles.btnMore} onClick={sortNumberHandler}>
+            Sort by name
+          </button>
+          <button className={styles.btnMore} onClick={sortNameHandler}>
+            Sort by number
+          </button>
         </div>
+        <div className={styles.wrapper}>{dataResults}</div>
         <div className={styles.bottomBtn}>
           <button className={styles.btnMore} onClick={loadMoreHandler}>
             Load more

@@ -11,6 +11,7 @@ input {
   width: 300px;
   border: none;
   border-bottom: 1px solid #757575;
+  height: 24px;
 }
 input:focus {
   outline: none;
@@ -28,15 +29,20 @@ input:valid ~ label {
 
 .btnMore {
   margin: 24px;
-	color: #fff !important;
-	text-transform: uppercase;
-	text-decoration: none;
-	background: #ed3330;
-	padding: 20px;
-	border-radius: 5px;
-	display: inline-block;
-	border: none;
-	transition: all 0.4s ease 0s;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #ed3330;
+  padding: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
   cursor: pointer;
+}
 
+.controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
